@@ -1,13 +1,23 @@
 import React from 'react';
+// import Form from '../Form/Form.js';
 
-export default function Product() {
-    
+export default function Product(props) {
+
     return (
         <div>
+            <hr />
             <p>Product</p>
-            {/* <h2>{this.props.imageUrl}</h2>
-            <h3>{this.props.name}</h3>
-            <h3>{this.props.price}</h3> */}
+            <img src={props.url} />
+            <div>
+                <p>name:{props.name}</p>
+                <p>${props.price}</p>
+
+            </div>
+            <div>
+                <button type='text' onClick={() => { props.deleteItem() }} >delete</button>
+                <button type='text'>edit</button>
+            </div>
+            <hr />
         </div>
     )
 }

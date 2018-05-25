@@ -1,52 +1,44 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-import './App.css';
 import Dashboard from './component/Dashboard/Dashboard.js';
 import Form from './component/Form/Form.js';
 import Header from './component/Header/Header.js';
+import axios from 'axios';
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      inventory: [
-        {
-          name: 'shoes',
-          price: 100,
-          image: 'PICTURE'
-        },
-        {
-          name: 'shoes',
-          price: 100,
-          image: 'PICTURE'
-        }
-      ]
+      inventory: [],
+      selected: null,
     }
+    this.componentDidMount = this.componentDidMount.bind(this)
   }
-  render() {
-    console.log(this.state)
-    let mappedinventory = this.state.inventory.map((e, i) => {
-      return (
-        <div key={i}>
-          <Dashboard
-            id = {e.id}
-            name={e.name}
-            price={e.price}
-            image={e.image}
-            // deleteItem={this.deleteItem}
-          />
-        </div>
-      )
+
+  componentDidMount() {
+    axios.get('/api/inventory').then((res) => {
+      this.setState({
+        inventory: res.data
+      })
     })
+  }
+
+
+  render() {
+    // console.log(this.state)
     return (
       <div>
         <p>App</p>
         <Dashboard
-          name
+          inventory={this.state.inventory}
+          get={this.componentDidMount}
         />
-        <Form />
-        <Header />
 
+        <Form
+          get={this.componentDidMount}
+          selected={this.state.selected}
+        />
+
+        <Header />
       </div>
     );
   }
