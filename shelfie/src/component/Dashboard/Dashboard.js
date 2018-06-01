@@ -5,6 +5,7 @@ import axios from 'axios';
 
 
 export default class Dashboard extends Component {
+    //add constuctor and keep state, or send a funcion 
 
     deleteItem(id) {
         axios.delete(`/api/products/${id}`).then(res => {
@@ -19,6 +20,7 @@ export default class Dashboard extends Component {
             return (
                 <div key={i}>
                     <Product
+                        id={e.id}
                         name={e.name}
                         price={e.price}
                         image={e.image}

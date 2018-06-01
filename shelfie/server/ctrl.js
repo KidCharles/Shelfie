@@ -19,9 +19,13 @@ module.exports = {
     deleteProduct: (req, res) => {
         const db = req.app.get('db');
         const { id } = req.params
+        console.log(req.params)
         //YOU NEED TO SEND INFO IN SQUARE BRACKETS!!
         db.delete_product([id])
             .then(inventory => res.status(200).send(inventory))
-            .catch(() => res.status(500).send())
+            .catch((err) => {
+                console.log(err)
+                res.status(500).send()
+            })
     }
 }
